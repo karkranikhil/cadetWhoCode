@@ -1,13 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var expressValidator = require('express-validator')
-var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const expressValidator = require('express-validator')
 
-var app = express();
+const mongoose = require('mongoose')
+const config = require('./config')
+
+const indexRouter = require('./routes/index');
+mongoose.connect(config.dbConnstring)
+
+global.User = require('./models/user')
+
+
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
