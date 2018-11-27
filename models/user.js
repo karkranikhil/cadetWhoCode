@@ -12,16 +12,19 @@ var userSchema = new mongoose.Schema({
         required:true
     },
     hash:String,
-    salt:String
+    salt:String,
+    facebookId:String
 })
 
-userSchema.methods.setPassword = ((password)=>{
-    this.salth= crypto.randomBytes(16).toString('hex')
+userSchema.methods.setPassword = function(password){
+    this.salt= crypto.randomBytes(16).toString('hex')
     this.hash= crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha1').toString('hex')
-})
-userSchema.methods.validPassword = ((password)=>{
+}
+userSchema.methods.validPassword = function(password){
+    console.log(password)
+    console.log(this.salt)
     var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha1').toString('hex')
     return this.hash === hash
-})
+}
 
-module.exports= mongoose.model('user', userSchema)
+module.exports= mongoose.model('User', userSchema)

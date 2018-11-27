@@ -1,4 +1,9 @@
 <form class="form-signup" method="post">
+     {{#each errorMessages}}
+        <div class="alert alert-danger">
+            {{this.msg}}
+        </div>
+    {{/each}}
     <h2 class="form-signup-heading text-center">New Account</h2>
     <br/>
     <input type="text" name="name" class="form-control" placeholder="Name" autofocus="" require=""/>
@@ -10,4 +15,9 @@
     <input type="password" name="confirmPassword" class="form-control" placeholder="Confirm password" autofocus="" require=""/>
     <br/>
     <button type="submit" class="btn btn-lg btn-primary btn-block">Sign up</button>
+    <br/>
+    <h4 class="text-center">or</h4>
+    <br/>
+    <a href="/auth/facebook" class="btn btn-lg btn-sucess btn-block">Sign Up with Facebook</a>
+    
 </form>

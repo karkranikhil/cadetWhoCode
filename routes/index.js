@@ -40,10 +40,5 @@ router.route('/contact').get((req,res,next)=>{
   }
   
 })
-router.get('/login',(req, res, next)=>{
-  res.render('login', {title:'Login your account'})
-})
-router.get('/register',(req, res, next)=>{
-  res.render('register', {title:'Register a new account'})
-})
+
 module.exports = router;

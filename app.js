@@ -6,9 +6,14 @@ const logger = require('morgan');
 const expressValidator = require('express-validator')
 
 const mongoose = require('mongoose')
-const config = require('./config')
+const passport = require('passport')
+const session = require('express-session')
 
+require('./passport')
+
+const config = require('./config')
 const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
 mongoose.connect(config.dbConnstring)
 
 global.User = require('./models/user')
@@ -26,10 +31,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(expressValidator())
 
 app.use(cookieParser());
+app.use(session({
+  secret:config.sessionKey,
+  resave:false,
+  saveUninitialized:true
+  // cookie:{secure:true}
+}));
+
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-
+app.use((req,res,next)=>{
+  if(req.isAuthenticated()){
+    res.locals.user = req.user;
+  }
+  next()
+})
+app.use('/', indexRouter)
+app.use('/', authRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
