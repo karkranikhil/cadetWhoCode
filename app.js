@@ -14,9 +14,11 @@ require('./passport')
 const config = require('./config')
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const taskRouter = require('./routes/task');
 mongoose.connect(config.dbConnstring)
 
 global.User = require('./models/user')
+global.Task = require('./models/task')
 
 
 const app = express();
@@ -50,6 +52,7 @@ app.use((req,res,next)=>{
 })
 app.use('/', indexRouter)
 app.use('/', authRouter)
+app.use('/', taskRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
