@@ -30,8 +30,8 @@ passport.use(new LocalStrategy({
 }))
 
 passport.use(new FacebookStrategy({
-    clientID:'315217815749416',
-    clientSecret:'721b0509f314f355398a02125bdb0505',
+    clientID:'315***49416',
+    clientSecret:'721b0509f314*****5398a02125bdb0505',
     callbackURL:'http://localhost:3000/auth/facebook/callback',
     profileFields:['id', 'displayName', 'email']
 },(token, refereshToken, profile, done)=>{
