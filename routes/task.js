@@ -17,12 +17,13 @@ router.get('/createTask', (req, res)=>{
 router.get('/task/:id', (req, res)=>{
     if(req.params.id){
         Task.findOne({_id:req.params.id},(err, data)=>{
+            console.log('content', data)
             if(err){
                 console.log(err)
                 res.render('error')
             }
             if(data){
-                res.render('task', {data:data})
+                res.render('task', {content:data.content, roomId:data.id})
             } else {
                 res.render('error')
             }

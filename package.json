@@ -15,8 +15,10 @@
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
     "nodemailer": "^4.7.0",
+    "ot": "git+https://github.com/Operational-Transformation/ot.js.git",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "socket.io": "^2.1.1"
   }
 }
